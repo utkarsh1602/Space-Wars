@@ -132,7 +132,7 @@ def main():
 
         if player_1_health<=0 or player_2_health<=0:
 
-            game_over = WINNER_FONT.render("GAME OVER!!",1,(0,255,0))
+            game_over = WINNER_FONT.render("GAME OVER!!!",1,(0,255,0))
             screen.blit(game_over,(width//2 - game_over.get_width()//2,height//2 - game_over.get_height()))
 
             if player_1_health<=0:
