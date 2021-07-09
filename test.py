@@ -35,6 +35,9 @@ clock = pygame.time.Clock()
 play_1_bullets = []
 play_2_bullets = []
 
+bullet_sound = pygame.mixer.Sound(os.path.join("asset","laser-cannon-shot.wav"))
+game_over_sound = pygame.mixer.Sound(os.path.join("asset","spaceship-system-break-down.wav"))
+
 def main():
 
     player_1_health = 10
@@ -48,11 +51,15 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and len(play_1_bullets)<BULLET_COUNT:
+                    pygame.mixer.Sound.play(bullet_sound)
+                    pygame.mixer.music.stop()
                     bullet = pygame.Rect(ballrect_2.x+100,ballrect_2.y+50,6,4)
                     play_1_bullets.append(bullet)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RCTRL and len(play_2_bullets)<BULLET_COUNT:
+                    pygame.mixer.Sound.play(bullet_sound)
+                    pygame.mixer.music.stop()
                     bullet = pygame.Rect(ballrect_1.x,ballrect_1.y+50,6,4)
                     play_2_bullets.append(bullet)        
 
@@ -131,6 +138,9 @@ def main():
         screen.blit(player_ship_2, ballrect_2)
 
         if player_1_health<=0 or player_2_health<=0:
+
+            pygame.mixer.Sound.play(game_over_sound)
+            pygame.mixer.music.stop()
 
             game_over = WINNER_FONT.render("GAME OVER!!!",1,(0,255,0))
             screen.blit(game_over,(width//2 - game_over.get_width()//2,height//2 - game_over.get_height()))
