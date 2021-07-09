@@ -37,6 +37,7 @@ play_2_bullets = []
 
 bullet_sound = pygame.mixer.Sound(os.path.join("asset","laser-cannon-shot.wav"))
 game_over_sound = pygame.mixer.Sound(os.path.join("asset","spaceship-system-break-down.wav"))
+hit = pygame.mixer.Sound(os.path.join("asset","explosion.wav"))
 
 def main():
 
@@ -104,6 +105,8 @@ def main():
         for bullet in play_1_bullets:
             bullet.x += 3     
             if ballrect_1.colliderect(bullet):
+                pygame.mixer.Sound.play(hit)
+                pygame.mixer.music.stop()
                 player_1_health-=1
                 play_1_bullets.remove(bullet)
             if bullet.x >= width:
@@ -112,6 +115,8 @@ def main():
         for bullet in play_2_bullets:
             bullet.x -= 3     
             if ballrect_2.colliderect(bullet):
+                pygame.mixer.Sound.play(hit)
+                pygame.mixer.music.stop()
                 player_2_health-=1
                 play_2_bullets.remove(bullet)
             if bullet.x <= 0:
